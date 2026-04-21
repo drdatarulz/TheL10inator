@@ -4,7 +4,14 @@ Internal web app for running One Click Contractor's weekly EOS Level 10 (L10) le
 
 Built by Theoretically Impossible for OCC as a deliberate exercise of the TI v4 agentic development pipeline.
 
-See [`docs/PRD.md`](docs/PRD.md), [`docs/screen-inventory.md`](docs/screen-inventory.md), and [`docs/decisions-log.md`](docs/decisions-log.md) for the full design story.
+## Documentation
+
+- [`CLAUDE.md`](CLAUDE.md) — project-specific rules and conventions
+- [`ARCHITECTURE.md`](ARCHITECTURE.md) — system design, database schema, design rationale
+- [`docs/PRD.md`](docs/PRD.md) — product requirements
+- [`docs/screen-inventory.md`](docs/screen-inventory.md) — screen inventory
+- [`docs/decisions-log.md`](docs/decisions-log.md) — PRD-phase decisions log
+- **Project board:** https://github.com/users/drdatarulz/projects/11 — single source of truth for work tracking
 
 ---
 

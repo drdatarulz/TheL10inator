@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Enforced by TI Engineering Standards: .NET formatting must pass before commit.
+set -e
+
+echo "Running 'dotnet format --verify-no-changes' on TheL10inator.sln ..."
+dotnet format TheL10inator.sln --verify-no-changes --no-restore
