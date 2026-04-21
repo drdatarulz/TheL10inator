@@ -1,0 +1,60 @@
+name: thel10inator
+
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Your_strong_password123"
+      MSSQL_PID: "Developer"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      retries: 10
+      start_period: 30s
+
+  migrator:
+    build:
+      context: .
+      dockerfile: src/TheL10inator.Migrator/Dockerfile
+    depends_on:
+      sql:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__Sql: "Server=sql,1433;Database=TheL10inator;User Id=sa;Password=Your_strong_password123;Encrypt=False;TrustServerCertificate=True"
+    restart: "no"
+
+  api:
+    build:
+      context: .
+      dockerfile: src/TheL10inator.Api/Dockerfile
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Sql: "Server=sql,1433;Database=TheL10inator;User Id=sa;Password=Your_strong_password123;Encrypt=False;TrustServerCertificate=True"
+      Authentication__UseDevBypass: "true"
+      Cors__AllowedOrigins__0: "http://localhost:4200"
+      Cors__AllowedOrigins__1: "http://localhost:8080"
+    ports:
+      - "5080:8080"
+
+  web:
+    build:
+      context: .
+      dockerfile: src/TheL10inator.Web/Dockerfile
+    depends_on:
+      - api
+    environment:
+      API_UPSTREAM: "http://api:8080"
+    ports:
+      - "4300:80"
+
+volumes:
+  sql_data:

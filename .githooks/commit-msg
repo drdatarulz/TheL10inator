@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Enforced by TI Engineering Standards: commit messages must not include Co-Authored-By trailers.
+set -e
+
+msg_file="$1"
+
+if grep -qiE '^Co-Authored-By:' "$msg_file"; then
+  echo "ERROR: Commit message contains a 'Co-Authored-By' trailer." >&2
+  echo "TI Engineering Standards prohibit Co-Authored-By trailers. Remove them and retry." >&2
+  exit 1
+fi
