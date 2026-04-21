@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  backend:
+    name: Backend (build + unit tests)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore TheL10inator.sln
+
+      - name: Build
+        run: dotnet build TheL10inator.sln -c Release --no-restore
+
+      - name: Test - Domain
+        run: dotnet test tests/TheL10inator.Domain.Tests -c Release --no-build --no-restore
+
+      - name: Test - Api
+        run: dotnet test tests/TheL10inator.Api.Tests -c Release --no-build --no-restore
+
+  frontend:
+    name: Frontend (build)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: src/TheL10inator.Web/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --prefix src/TheL10inator.Web
+
+      - name: Build
+        run: npm run build --prefix src/TheL10inator.Web
