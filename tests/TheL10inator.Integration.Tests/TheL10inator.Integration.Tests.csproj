@@ -25,6 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\TheL10inator.Api\TheL10inator.Api.csproj" />
     <ProjectReference Include="..\..\src\TheL10inator.Infrastructure\TheL10inator.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\TheL10inator.Migrator\TheL10inator.Migrator.csproj" />
     <ProjectReference Include="..\TheL10inator.Fakes\TheL10inator.Fakes.csproj" />
   </ItemGroup>
 

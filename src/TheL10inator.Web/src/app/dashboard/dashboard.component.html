@@ -1,0 +1,20 @@
+@let me = (me$ | async);
+
+<div class="dashboard-root">
+  <header class="dashboard-header">
+    <h1>Welcome, {{ me?.displayName || me?.email || '...' }}</h1>
+    <p class="team-line">Team: {{ me?.teamName || '...' }}</p>
+  </header>
+
+  <section class="summary-grid">
+    @for (card of cards; track card.title) {
+      <article class="card summary-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ card.title }}</h5>
+          <p class="count">0</p>
+          <p class="empty-copy">{{ card.emptyCopy }}</p>
+        </div>
+      </article>
+    }
+  </section>
+</div>
