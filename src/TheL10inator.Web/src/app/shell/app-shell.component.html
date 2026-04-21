@@ -1,0 +1,53 @@
+@let currentUser = (currentUser$ | async);
+
+<div class="shell-root">
+  <nav class="top-bar navbar navbar-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0">TheL10inator</span>
+      <span class="team-name">{{ currentUser?.teamName }}</span>
+      <div class="user-menu">
+        <span class="user-name">{{ currentUser?.displayName || currentUser?.email }}</span>
+        <button type="button" class="btn btn-sm btn-outline-light ms-2" (click)="signOut()">
+          Sign out
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="shell-body">
+    <aside class="sidebar">
+      <ul class="nav flex-column">
+        @for (link of memberLinks; track link.label) {
+          <li class="nav-item">
+            <a
+              class="nav-link disabled"
+              aria-disabled="true"
+              [attr.title]="'Coming in ' + link.milestone"
+              href="#"
+              (click)="$event.preventDefault()"
+            >{{ link.label }}</a>
+          </li>
+        }
+
+        @if (currentUser?.role === 'Admin') {
+          <li class="nav-header">Admin</li>
+          @for (link of adminLinks; track link.label) {
+            <li class="nav-item">
+              <a
+                class="nav-link disabled"
+                aria-disabled="true"
+                [attr.title]="'Coming in ' + link.milestone"
+                href="#"
+                (click)="$event.preventDefault()"
+              >{{ link.label }}</a>
+            </li>
+          }
+        }
+      </ul>
+    </aside>
+
+    <main class="shell-main">
+      <router-outlet />
+    </main>
+  </div>
+</div>
