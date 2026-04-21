@@ -146,9 +146,23 @@ docker compose up --build
 
 ## Work Tracking
 
-- **GitHub Project board:** <TBD — to be filled in after the board is created>
+- **GitHub Project board:** https://github.com/users/drdatarulz/projects/11
+- **GitHub Project number:** `11`
+- **Project ID:** `PVT_kwHOAcXLEM4BVTwF`
 - **Story ID prefix:** `L10` (e.g., `L10-7` for issue #7)
-- **GitHub Project number:** <TBD>
+
+### Field IDs (for skills and GraphQL mutations)
+
+| Field | Field ID | Options |
+|---|---|---|
+| Status | `PVTSSF_lAHOAcXLEM4BVTwFzhQwaq4` | Inbox `4a5ecd39` / Up Next `eb8123d6` / In Progress `cc31ae6f` / Waiting/Blocked `8e8e59cb` / Someday/Maybe `ec92c5f7` / Done `9c7b75b7` |
+| Type | `PVTSSF_lAHOAcXLEM4BVTwFzhQwa3o` | Story `66b29e9f` / Bug `2f76dcf0` / Task `5a0b32f3` |
+| Priority | `PVTSSF_lAHOAcXLEM4BVTwFzhQwa4U` | High `a6c0ac16` / Medium `40dcf3b4` / Low `effd7293` |
+| Story ID | `PVTF_lAHOAcXLEM4BVTwFzhQwa4Y` | text |
+| Component | `PVTF_lAHOAcXLEM4BVTwFzhQwa5Q` | text |
+| Due Date | `PVTF_lAHOAcXLEM4BVTwFzhQwa5U` | date |
+
+> **One-time manual setup required:** The repo is already linked to the project, but the **Auto-add to project** workflow must be enabled from the board UI (Settings → Workflows → Auto-add to project → turn on, filter: `is:issue`). Also enable **Item closed → Done** and **PR merged → Done** under Workflows. GitHub's API does not expose these toggles programmatically.
 
 ---
 
